@@ -97,7 +97,8 @@
     <span class="text-xl">Upcoming Events</span>
     <div class="text-blue-400 cursor-pointer font-medium">Show all</div>
   </div>
-  <div class="divide-y divide-gray-200 mt-4">
+  <!-- Desktop View -->
+  <div class="divide-y divide-gray-200 mt-4 hidden md:block">
     {#each events as event, i}
       <div
         class="grid grid-cols-[auto_1fr_auto] gap-4 items-center content-center py-2"
@@ -147,7 +148,7 @@
                 )}`}
                 style="width: {(event.capacityUsed / event.capacityTotal) *
                   100}%;"
-              />
+              ></div>
             </div>
             <div class="text-xs text-gray-500">{event.inCart} in cart</div>
           </div>
@@ -160,4 +161,80 @@
       </div>
     {/each}
   </div>
+  <!-- End Desktop View -->
+  <!-- Mobile View -->
+  <div class="divide-y divide-gray-200 mt-4 md:hidden flex flex-col">
+    {#each events as event, i}
+      <div class="flex flex-col items-start space-y-4 py-4">
+        <!-- Heading Section -->
+        <div class="flex items-center space-x-2">
+          <div class="text-xl">{event.name}</div>
+        </div>
+        <div class="grid grid-cols-3 gap-x-4">
+          <div class="text-sm text-gray-500">
+            <div class="font-semibold">Date</div>
+            <div class="text-lg">{event.dateMonth} {event.dateNum}</div>
+          </div>
+          <div class="text-sm text-gray-500">
+            <div class="font-semibold">Time</div>
+            <div class="text-lg">{event.time}</div>
+          </div>
+          <div class="text-sm text-gray-500">
+            <div class="font-semibold">Revenue</div>
+            <div class="text-lg font-medium text-green-500">${event.price}</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-x-4">
+          <div class="text-sm text-gray-500">
+            <div class="font-semibold">Performers</div>
+            <div class="flex items-center -space-x-2">
+              {#each event.avatars as avatar, idx}
+                <img
+                  src={avatar}
+                  alt="Avatar"
+                  class="w-8 h-8 rounded-full border-2 border-white"
+                />
+              {/each}
+              <div
+                class="w-8 h-8 flex items-center justify-center bg-gray-200 rounded-full text-sm font-medium border-2 border-white"
+              >
+                +5
+              </div>
+            </div>
+          </div>
+          <div class="text-sm text-gray-500">
+            <div class="font-semibold">Tickets</div>
+            <div class="text-lg">{event.capacityUsed}/{event.capacityTotal}</div>
+            <div class="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div
+                class={`h-full ${getBarColor(
+                  event.capacityUsed,
+                  event.capacityTotal
+                )}`}
+                style="width: {(event.capacityUsed / event.capacityTotal) *
+                  100}%;"
+              >
+              </div>
+            </div>
+            
+          </div>
+          <div class="text-sm text-gray-500">
+            <div class="font-semibold">In Cart</div>
+            <div class="text-lg font-medium">
+              {event.inCart}
+            </div>
+          </div>
+        </div>
+
+
+        <!-- End Heading Section -->  
+
+        <!-- Details Section -->
+        <!--End Details Section  -->
+      </div>
+    {/each}
+  </div>
+
+  <!-- End Mobile View -->
 </div>

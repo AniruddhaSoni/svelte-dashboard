@@ -14,9 +14,9 @@
   <span class="text-xl">Dashboard</span>
   <span class="text-sm text-gray-500">Last 30 days</span>
 </div>
-<div class="grid grid-cols-[1fr_480px] gap-x-4 mt-4">
+<div class="grid grid-cols-1 md:grid-cols-[1fr_480px] gap-x-4 mt-4">
   <div class="">
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-4 flex-wrap">
       <DashboardCard />
       <DashboardCard />
       <DashboardCard />
@@ -25,9 +25,11 @@
     <RevenueChart />
     <RecentOrders />
   </div>
-  <div class="space-y-4">
+  <div class="space-y-4 flex flex-col-reverse md:flex-col">
     <NotificationPanel />
-    <TopEventStats />
-    <UnderPerformingStats />
+    <div class="">
+      <TopEventStats />
+      <UnderPerformingStats />
+    </div>
   </div>
 </div>
